@@ -6,7 +6,8 @@ class FilmsController < ApplicationController
     if @film.save
       redirect_to category_path(@film.category)
     else
-      render 'new'
+      flash[:errors] = @film.errors.full_messages
+      redirect_to new_film_path
     end
   end
 
