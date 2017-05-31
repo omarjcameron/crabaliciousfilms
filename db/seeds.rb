@@ -22,8 +22,10 @@ User.create(username: 'Max', email: 'max@test.com', password: 'password', truste
               password: Faker::Name.first_name)
 end
 
-5.times do
-  Category.create(name: Faker::Beer.name)
+CATEGORIES = ['Action', 'Comedy', 'Drama', 'Thriller', 'Horror', 'RomCom', 'Adult', 'Kids']
+
+CATEGORIES.each do |category|
+  Category.create(name: category)
 end
 
 10.times do
