@@ -1,0 +1,9 @@
+<h1>Welcome to DBC Film Reviews</h1>
+
+<h2>All Categories</h2>
+
+<ol>
+  <% @categories.each do |category| %>
+    <li><%= link_to "#{category.name}", category_path(category) %></li>
+  <% end %>
+</ol>
