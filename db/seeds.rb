@@ -6,6 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.all.destroy!
+Comment.all.destroy!
+Category.all.destroy!
+Review.all.destroy!
+Rating.all.destroy!
+Film.all.destroy!
+
 User.create(username: 'Max', email: 'max@test.com', password: 'password', trusted: true)
 
 4.times do
@@ -34,4 +41,8 @@ end
   Rating.create(stars: rand(1..5),
                 user_id: User.all.sample.id,
                 film_id: Film.all.sample.id)
+end
+
+10.times do
+  Comment.create(content: Faker::Beer.name, user_id: User.all.sample.id, review_id: Review.all.sample.id)
 end
