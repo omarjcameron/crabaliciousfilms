@@ -5,5 +5,10 @@
 <ol>
   <% @categories.each do |category| %>
     <li><%= link_to "#{category.name}", category_path(category) %></li>
+    <ul>
+      <% category.films.each do |film| %>
+        <li><%= film.title %></li>
+      <% end %>
+    </ul>
   <% end %>
 </ol>

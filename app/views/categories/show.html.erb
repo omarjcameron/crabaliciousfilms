@@ -1,2 +1,7 @@
 <h1>Category Page for <%= @category.name %></h1>
 
+<ol>
+  <% @category.films.each do |film| %>
+    <li><%= film.title %></li>
+  <% end %>
+</ol>
