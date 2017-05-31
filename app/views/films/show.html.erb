@@ -1,0 +1,18 @@
+<h1>Film page for <%= @film.title %></h1>
+
+<h2>Ratings</h2>
+
+<ol>
+  <% @film.ratings.each do |rating| %>
+    <li><%= rating.stars %> - <%= rating.user.username %></li>
+  <% end %>
+</ol>
+
+<h3>Reviews</h3>
+
+<div>
+  <% @film.reviews.each do |review| %>
+    <h4><%= review.title %></h4>
+    <p><%= review.body %></p>
+  <% end %>
+</div>

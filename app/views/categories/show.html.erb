@@ -2,7 +2,7 @@
 
 <ol>
   <% @category.films.each do |film| %>
-    <li><%= film.title %></li>
+    <li><%= link_to "#{film.title}", film_path(film) %></li>
   <% end %>
 </ol>
 
