@@ -1,0 +1,8 @@
+<%= form_for @film do |f| %>
+  <%= f.label :title %><br>
+  <%= f.text_field :title %>
+
+  <%= f.select :category, Category.all.pluck(:name) %>
+
+  <%= f.submit "Add Film" %>
+<% end %>

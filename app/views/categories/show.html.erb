@@ -1,0 +1,9 @@
+<h1>Category Page for <%= @category.name %></h1>
+
+<ol>
+  <% @category.films.each do |film| %>
+    <li><%= link_to "#{film.title}", film_path(film) %></li>
+  <% end %>
+</ol>
+
+<%= link_to 'Add Film', new_film_path %>
