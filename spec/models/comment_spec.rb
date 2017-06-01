@@ -15,13 +15,13 @@ RSpec.describe Comment, type: :model do
       expect(comment).to_not be_valid
     end
 
-    it 'is not valid without a user id' do
-      comment.user_id = nil
+    it 'is not valid without a user' do
+      comment.user = nil
       expect(comment).to_not be_valid
     end
 
-    it 'is not valid with a review id' do
-      comment.review_id = nil
+    it 'is not valid with a review' do
+      comment.review = nil
       expect(comment).to_not be_valid
     end
   end
