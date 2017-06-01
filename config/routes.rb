@@ -7,5 +7,8 @@ Rails.application.routes.draw do
 
   resources :categories, only: [:index, :show]
 
-  resources :films, except: [:index, :edit, :update]
+  resources :films, except: [:index, :edit, :update]  do
+    resources :reviews, except: [:index, :show]
+    resources :ratings, except: [:index, :show]
+  end
 end
