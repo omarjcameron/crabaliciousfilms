@@ -2,9 +2,10 @@
 
 <h2>Ratings</h2>
 
-<ol>
+<p>Average Rating - <%= @film.average_rating %> stars</p>
+<ul>
   <% @film.ratings.each do |rating| %>
-    <li><%= rating.stars %> - <%= rating.user.username %></li>
+    <li><%= rating.stars %> stars - <%= rating.user.username %></li>
 
     <% if logged_in? && current_user == rating.user %>
 
@@ -13,7 +14,7 @@
 
     <% end %>
   <% end %>
-</ol>
+</ul>
 
 <% if logged_in? %>
 

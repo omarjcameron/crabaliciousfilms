@@ -1,4 +1,5 @@
 class FilmsController < ApplicationController
+  before_action :authorize, only: :new
   def create
     @film = Film.new(film_params)
     @film.category = Category.find_by(name: category_params[:category])
