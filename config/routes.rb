@@ -14,12 +14,6 @@ Rails.application.routes.draw do
 end
 
 #           Prefix Verb   URI Pattern                                Controller#Action
-#     film_reviews POST   /films/:film_id/reviews(.:format)          reviews#create
-#  new_film_review GET    /films/:film_id/reviews/new(.:format)      reviews#new
-# edit_film_review GET    /films/:film_id/reviews/:id/edit(.:format) reviews#edit
-#      film_review PATCH  /films/:film_id/reviews/:id(.:format)      reviews#update
-#                  PUT    /films/:film_id/reviews/:id(.:format)      reviews#update
-#                  DELETE /films/:film_id/reviews/:id(.:format)      reviews#destroy
 #     film_ratings POST   /films/:film_id/ratings(.:format)          ratings#create
 #  new_film_rating GET    /films/:film_id/ratings/new(.:format)      ratings#new
 # edit_film_rating GET    /films/:film_id/ratings/:id/edit(.:format) ratings#edit
