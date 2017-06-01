@@ -36,7 +36,7 @@ end
 20.times do
   Review.create(title: Faker::Music.instrument,
                 body: Faker::Name.title,
-                user_id: User.all.sample.id,
+                user_id: User.where(trusted: true).sample.id,
                 film_id: Film.all.sample.id)
 end
 
