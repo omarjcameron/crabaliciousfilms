@@ -1,27 +1,27 @@
 <h1>Sign In</h1>
 
 <% if @errors %>
-  <div>
+  <div id="error_explanation">
     <ul>
-      <%= @errors.each do |msg| %>
+      <% @errors.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
   </div>
 <% end %>
 
-<%= form_for :session, url: sessions_path do |f| %>
+<%= form_tag sessions_path do %>
   <p>
-    <%= f.label :username %> <br>
-    <%= f.text_field :username %>
+    <%= label_tag :username %><br>
+    <%= text_field_tag :username, params[:username] %>
   </p>
 
   <p>
-    <%= f.label :password %> <br>
-    <%= f.password_field :password %>
+    <%= label_tag :password %><br>
+    <%= password_field_tag :password %>
   </p>
 
   <p>
-    <%= f.submit "Sign in" %>
+    <%= submit_tag "Sign In" %>
   </p>
 <% end %>
