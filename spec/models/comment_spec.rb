@@ -25,4 +25,9 @@ RSpec.describe Comment, type: :model do
       expect(comment).to_not be_valid
     end
   end
+
+  describe 'associations' do
+    it { should belong_to(:user) }
+    it { should belong_to(:review) }
+  end
 end
