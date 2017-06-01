@@ -6,5 +6,6 @@ class CreateFilms < ActiveRecord::Migration[5.1]
 
       t.timestamps null: false
     end
+    add_index :films, :title, unique: true
   end
 end
