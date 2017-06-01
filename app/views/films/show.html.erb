@@ -5,6 +5,7 @@
 <ol>
   <% @film.ratings.each do |rating| %>
     <li><%= rating.stars %> - <%= rating.user.username %></li>
+    <%= link_to "Edit", edit_film_rating_path(@film, rating) %>
   <% end %>
 </ol>
 
@@ -17,6 +18,7 @@
     <h4><%= review.title %></h4>
     <p><%= review.body %></p>
     <p><%= review.user.username %></p>
+    <%= link_to "Edit", edit_film_review_path(@film, review) %>
   <% end %>
 </div>
 

@@ -1,13 +1,3 @@
 <h1>Ratings Form</h1>
 
-<%= form_for [@film, @rating] do |f| %>
-  <%= f.label :stars, "Stars" %>
-  <%= f.select :stars, [1, 2, 3, 4, 5] %>
-  <%= f.submit "Submit" %>
-<% end %>
-
-<% if flash[:errors] %>
-  <% flash[:errors].each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>
-<% end %>
+<%= render 'form' %>

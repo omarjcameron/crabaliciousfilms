@@ -18,11 +18,21 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-
+    @film = Film.find(params[:film_id])
+    @review = Review.find(params[:id])
   end
 
   def update
+    @film = Film.find(params[:film_id])
+    @review = Review.find(params[:id])
+    @review.assign_attributes(review_params)
 
+    if @review.save
+      redirect_to @film
+    else
+      flash[:errors] = @review.errors.full_messages
+      redirect_to edit_film_review_path(@film , @review)
+    end
   end
 
   def destroy
