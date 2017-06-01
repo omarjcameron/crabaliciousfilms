@@ -23,4 +23,12 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
   end
+
+  describe 'associations' do
+    it { should have_many(:ratings) }
+    it { should have_many(:reviews) }
+    it { should have_many(:reviewed_films) }
+    it { should have_many(:rated_films) }
+    it { should have_many(:comments) }
+  end
 end
