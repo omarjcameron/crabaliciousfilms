@@ -15,13 +15,7 @@
 <h3>Reviews</h3>
 
 <div>
-  <% @film.reviews.each do |review| %>
-    <h4><%= review.title %></h4>
-    <p><%= review.body %></p>
-    <p><%= review.user.username %></p>
-    <%= link_to "Edit", edit_film_review_path(@film, review) %>
-    <%= link_to "Delete", film_review_path(@film, review), method: :delete %>
-  <% end %>
+  <%= render @film.reviews %>
 </div>
 
 <%= link_to "Add New Review", new_film_review_path(@film) %>

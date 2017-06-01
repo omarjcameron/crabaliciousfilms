@@ -1,0 +1,22 @@
+<h4><%= review.title %></h4>
+
+<p><%= review.body %></p>
+<p><%= review.user.username %></p>
+
+<%= link_to "Edit", edit_film_review_path(@film, review) %>
+<%= link_to "Delete", film_review_path(@film, review), method: :delete %>
+
+<div style="background-color: lightgray">
+  <h5>Comments</h5>
+
+  <%= link_to "Add Comment", new_review_comment_path(review) %>
+
+  <% review.comments.each do |comment| %>
+    <p><%= comment.content %></p>
+    <p>by <%= comment.user.username %></p>
+    
+    <%= link_to "Edit", edit_review_comment_path(review, comment) %>
+    <%= link_to "Delete", review_comment_path(review, comment), method: :delete %>
+  <% end %>
+
+</div>
