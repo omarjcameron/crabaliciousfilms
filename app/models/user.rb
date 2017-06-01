@@ -9,4 +9,10 @@ class User < ApplicationRecord
   validates_presence_of :username, :email
   validates_uniqueness_of :username, :email
   validates :password, length: { minimum: 6 }
+
+  scope
+
+  def reviewed_and_rated_films 
+    (reviewed_films + rated_films).uniq
+  end
 end
