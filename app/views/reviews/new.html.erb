@@ -1,0 +1,17 @@
+<h1>Review Form</h1>
+
+<%= form_for [@film, @review] do |f| %>
+  <%= f.label :title, "Title" %>
+  <%= f.text_field :title %>
+
+  <%= f.label :body, "Body" %>
+  <%= f.text_area :body %>
+
+  <%= f.submit "Submit" %>
+<% end %>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+<% end %>

@@ -13,11 +13,15 @@ class RatingsController < ApplicationController
       redirect_to @film
     else
       flash[:errors] = @rating.errors.full_messages
-      render 'new'
+      redirect_to new_film_rating_path(@film)
     end
   end
 
   def edit
+
+  end
+
+  def update
 
   end
 

@@ -16,7 +16,10 @@
   <% @film.reviews.each do |review| %>
     <h4><%= review.title %></h4>
     <p><%= review.body %></p>
+    <p><%= review.user.username %></p>
   <% end %>
 </div>
+
+<%= link_to "Add New Review", new_film_review_path(@film) %>
 
 <%= link_to 'Delete Film', film_path(@film), method: :delete %>
