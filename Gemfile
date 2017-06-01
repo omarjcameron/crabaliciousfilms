@@ -40,6 +40,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
   gem 'shoulda'
+  gem 'rails-controller-testing'
+  gem 'launchy'
 end
 
 group :development do
