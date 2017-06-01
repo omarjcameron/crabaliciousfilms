@@ -14,16 +14,6 @@ Rails.application.routes.draw do
 end
 
 #           Prefix Verb   URI Pattern                                Controller#Action
-#             root GET    /                                          categories#index
-#            users GET    /users(.:format)                           users#index
-#                  POST   /users(.:format)                           users#create
-#         new_user GET    /users/new(.:format)                       users#new
-#             user GET    /users/:id(.:format)                       users#show
-#         sessions POST   /sessions(.:format)                        sessions#create
-#      new_session GET    /sessions/new(.:format)                    sessions#new
-#          session DELETE /sessions/:id(.:format)                    sessions#destroy
-#       categories GET    /categories(.:format)                      categories#index
-#         category GET    /categories/:id(.:format)                  categories#show
 #     film_reviews POST   /films/:film_id/reviews(.:format)          reviews#create
 #  new_film_review GET    /films/:film_id/reviews/new(.:format)      reviews#new
 # edit_film_review GET    /films/:film_id/reviews/:id/edit(.:format) reviews#edit
