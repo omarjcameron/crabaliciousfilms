@@ -79,17 +79,17 @@ describe FilmsController do
     end  
   end  
 
-  describe "DELETE #destroy" do
-    it "responds with status code 302" do
+  describe 'DELETE #destroy' do
+    it 'responds with status code 302' do
       delete :destroy, params: { id: Film.last.id }
       expect(response).to have_http_status 302
     end
 
-    it "destroys the requested film" do
+    it 'destroys the requested film' do
       expect { delete(:destroy, params: { id: Film.last.id }) }.to change(Film, :count).by(-1)
     end
 
-    it "redirects to the root path" do
+    it 'redirects to the root path' do
       delete :destroy, params: { id: Film.last.id }
       expect(response).to redirect_to root_path
     end
