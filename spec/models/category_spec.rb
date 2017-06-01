@@ -15,6 +15,6 @@ RSpec.describe Category, type: :model do
   end
 
   describe 'associations' do
-   
+    it { should have_many(:films) }
   end
 end
