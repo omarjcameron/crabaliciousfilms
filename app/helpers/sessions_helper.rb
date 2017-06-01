@@ -5,6 +5,9 @@ module SessionsHelper
 
   def current_user
     @current_user ||= User.find(session[:id]) if session[:id]
+    # this rescue action handles the circumstance when we delete a user before logging out (from: elaine and omar :) )
+    rescue ActiveRecord::RecordNotFound
+      session[:user_id] = nil
   end
 
   def logged_in?
