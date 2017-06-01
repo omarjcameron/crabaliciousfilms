@@ -11,4 +11,8 @@ Rails.application.routes.draw do
     resources :reviews, except: [:index, :show]
     resources :ratings, except: [:index, :show]
   end
+
+  resources :comments, except: [:index, :show], 
+                       path: 'reviews/:review_id/comments',
+                       as: 'review_comments'
 end

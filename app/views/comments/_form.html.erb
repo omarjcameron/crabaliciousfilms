@@ -1,0 +1,12 @@
+<%= form_for [@review, @comment] do |f| %>
+  <%= f.label :content, "Comment" %><br>
+  <%= f.text_area :content %><br>
+
+  <%= f.submit "Submit" %>
+<% end %>
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+<% end %>

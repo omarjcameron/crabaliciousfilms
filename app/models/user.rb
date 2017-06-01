@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :reviewed_films, through: :reviews, source: :film
   has_many :rated_films, through: :ratings, source: :film
   has_many :comments
+  
   has_secure_password
 
   validates_presence_of :username, :email
