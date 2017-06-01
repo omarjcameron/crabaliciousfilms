@@ -5,5 +5,6 @@
     <li><%= link_to "#{film.title}", film_path(film) %></li>
   <% end %>
 </ol>
-
-<%= link_to 'Add Film', new_film_path %>
+<% if logged_in? && current_user.trusted %>
+  <%= link_to 'Add Film', new_film_path %>
+<% end %>
