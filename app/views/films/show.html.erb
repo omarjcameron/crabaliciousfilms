@@ -21,6 +21,14 @@
     <p><%= review.user.username %></p>
     <%= link_to "Edit", edit_film_review_path(@film, review) %>
     <%= link_to "Delete", film_review_path(@film, review), method: :delete %>
+
+    <div style="color: red; font-style: italic">
+      <h5>Comments</h5>
+      <% review.comments.each do |comment| %>
+        <p><%= comment.content %></p>
+        <p>by <%= comment.user.username %></p>
+      <% end %>
+    </div>
   <% end %>
 </div>
 
