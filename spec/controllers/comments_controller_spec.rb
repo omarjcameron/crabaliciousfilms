@@ -152,19 +152,19 @@ describe CommentsController do
     end
   end
 
-  # describe 'DELETE #destroy' do
-  #   it 'responds with status code 302' do
-  #     delete :destroy, params: { film_id: first_review_film.id, id: review.id }
-  #     expect(response).to have_http_status 302
-  #   end
+  describe 'DELETE #destroy' do
+    it 'responds with status code 302' do
+      delete :destroy, params: { review_id: first_comment_review.id, id: comment.id }
+      expect(response).to have_http_status 302
+    end
 
-  #   it 'destroys the requested review' do
-  #     expect { delete(:destroy, params: { film_id: first_review_film.id, id: review.id }) }.to change(Review, :count).by(-1)
-  #   end
+    it 'destroys the requested comment' do
+      expect { delete(:destroy, params: { review_id: first_comment_review.id, id: comment.id }) }.to change(Comment, :count).by(-1)
+    end
 
-  #   it 'redirects to the film path' do
-  #     delete :destroy, params: { film_id: first_review_film.id, id: review.id }
-  #     expect(response).to redirect_to film_path(first_review_film)
-  #   end
-  # end
+    it 'redirects to the film path' do
+      delete :destroy, params: { review_id: first_comment_review.id, id: comment.id }
+      expect(response).to redirect_to film_path(first_comment_review.film)
+    end
+  end
 end
