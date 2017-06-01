@@ -1,5 +1,9 @@
 <div>
-  <h1>Welcome, <%= current_user.username %>!</h1>
+  <% if @user == current_user %>
+    <h1>Welcome, <%= current_user.username %>!</h1>
+  <% else %>
+    <h1>Profile Page for <%= @user.username %></h1>
+  <% end %>
 
   <% if current_user.trusted %>
     <h3>Review/Rated Films</h3>

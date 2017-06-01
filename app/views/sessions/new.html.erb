@@ -1,5 +1,9 @@
 <h1>Sign In</h1>
 
+<% if flash[:logged_in_error] %>
+  <p><%= flash[:logged_in_error] %></p>
+<% end %>
+
 <% if @errors %>
   <div id="error_explanation">
     <ul>

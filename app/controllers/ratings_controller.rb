@@ -1,4 +1,5 @@
 class RatingsController < ApplicationController
+  before_action :authorize, only: :new
   def new
     @film = Film.find(params[:film_id])
     @rating = Rating.new

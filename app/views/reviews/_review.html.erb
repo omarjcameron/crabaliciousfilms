@@ -3,20 +3,32 @@
 <p><%= review.body %></p>
 <p><%= review.user.username %></p>
 
-<%= link_to "Edit", edit_film_review_path(@film, review) %>
-<%= link_to "Delete", film_review_path(@film, review), method: :delete %>
+<% if logged_in? && current_user == review.user %>
+
+  <%= link_to "Edit", edit_film_review_path(@film, review) %>
+  <%= link_to "Delete", film_review_path(@film, review), method: :delete %>
+
+<% end %>
 
 <div style="background-color: lightgray">
   <h5>Comments</h5>
 
-  <%= link_to "Add Comment", new_review_comment_path(review) %>
+  <% if logged_in? %>
+
+    <%= link_to "Add Comment", new_review_comment_path(review) %>
+
+  <% end %>
 
   <% review.comments.each do |comment| %>
     <p><%= comment.content %></p>
     <p>by <%= comment.user.username %></p>
-    
-    <%= link_to "Edit", edit_review_comment_path(review, comment) %>
-    <%= link_to "Delete", review_comment_path(review, comment), method: :delete %>
+
+    <% if logged_in? && current_user == comment.user %>
+
+      <%= link_to "Edit", edit_review_comment_path(review, comment) %>
+      <%= link_to "Delete", review_comment_path(review, comment), method: :delete %>
+
+    <% end %>
   <% end %>
 
 </div>
