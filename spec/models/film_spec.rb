@@ -20,6 +20,8 @@ RSpec.describe Film, type: :model do
   end
 
   describe 'associations' do
-    
+    it { should belong_to(:category) }
+    it { should have_many(:reviews) }
+    it { should have_many(:ratings) }
   end
 end
