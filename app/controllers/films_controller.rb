@@ -20,7 +20,10 @@ class FilmsController < ApplicationController
   end
 
   def destroy
+    @film = Film.find(params[:id])
+    @film.destroy
 
+    redirect_to root_path
   end
 
   private
