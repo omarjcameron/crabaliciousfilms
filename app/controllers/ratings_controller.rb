@@ -36,7 +36,10 @@ class RatingsController < ApplicationController
   end
 
   def destroy
-
+    @film = Film.find(params[:film_id])
+    @rating = Rating.find(params[:id])
+    @rating.destroy
+    redirect_to @film
   end
 
   private
