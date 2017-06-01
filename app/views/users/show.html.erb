@@ -1,19 +1,34 @@
 <div>
   <h1>Welcome, <%= current_user.username %>!</h1>
-  
+
   <% if current_user.trusted %>
     <h3>Review/Rated Films</h3>
     <% @user.reviewed_and_rated_films.each do |film| %>
       <p><b><%= film.title %></b></p>
 
-      <p>Review Title: <%= film.reviews[0].title %></p>
+      <% if @user.review_for_film(film).empty? %>
 
-      <p>Review Body: <%= film.reviews[0].body %></p>
+        <p>No Review</p>
 
-      <p>Reviewer: <%= film.reviews[0].user.username %></p>
+      <% else  %>
 
-      <p>Star Rating: <%= film.ratings[0].stars %> stars</p>
+        <p>Review Title: <%= @user.review_for_film(film)[0].title %></p>
+
+        <p>Review Body: <%= @user.review_for_film(film)[0].body %></p>
+
+      <% end %>
+
+      <% if @user.rating_for_film(film).empty? %>
+
+        <p>No Rating</p>
+
+      <% else %>
+
+        <p>Star Rating: <%= @user.rating_for_film(film)[0].stars %> stars</p>
+
+      <% end %>
     <% end %>
+
   <% else %>
     <h3>Rated Films</h3>
     <% @user.rated_films.each do |film| %>
@@ -23,6 +38,3 @@
     <% end %>
   <% end %>
 </div>
-
-
-
