@@ -12,8 +12,7 @@ Rails.application.routes.draw do
     resources :ratings, except: [:index, :show]
   end
 
-  resources :comments, only: [:edit, :update, :destroy]
-  resources :comments, only: [:new, :create], 
+  resources :comments, except: [:index, :show], 
                        path: 'reviews/:review_id/comments',
-                       as: :review_comments
+                       as: 'review_comments'
 end
