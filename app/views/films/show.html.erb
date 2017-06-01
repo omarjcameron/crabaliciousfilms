@@ -32,6 +32,7 @@
         <p><%= comment.content %></p>
         <p>by <%= comment.user.username %></p>
         <%= link_to "Edit", edit_review_comment_path(review, comment) %>
+        <%= link_to "Delete", review_comment_path(review, comment), method: :delete %>
       <% end %>
 
     </div>

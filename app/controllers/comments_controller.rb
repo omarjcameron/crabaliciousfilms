@@ -36,7 +36,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-
+    @review = Review.find(params[:review_id])
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to @review.film
   end
 
   private
