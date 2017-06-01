@@ -39,6 +39,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
+  gem 'pry-rails'
   gem 'shoulda'
   gem 'rails-controller-testing'
   gem 'launchy'

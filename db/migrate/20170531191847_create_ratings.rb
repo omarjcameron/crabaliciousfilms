@@ -7,5 +7,7 @@ class CreateRatings < ActiveRecord::Migration[5.1]
 
       t.timestamps null: false
     end
+
+    add_index :ratings, [:user_id, :film_id], unique: true
   end
 end

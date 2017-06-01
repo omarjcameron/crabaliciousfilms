@@ -15,6 +15,7 @@
 
 
 User.create(username: 'Max', email: 'max@test.com', password: 'password', trusted: true)
+User.create(username: 'Mike', email: 'mike@test.com', password: 'password', trusted: true)
 
 4.times do
   User.create(username: Faker::Name.first_name,
@@ -33,19 +34,21 @@ end
               category_id: Category.all.sample.id)
 end
 
-20.times do
+10.times do |n|
   Review.create(title: Faker::Music.instrument,
                 body: Faker::Name.title,
-                user_id: User.all.sample.id,
-                film_id: Film.all.sample.id)
+                user_id: User.where(trusted: true).sample.id,
+                film_id: Film.all[n].id)
 end
 
-20.times do
+10.times do |n|
   Rating.create(stars: rand(1..5),
                 user_id: User.all.sample.id,
-                film_id: Film.all.sample.id)
+                film_id: Film.all[n].id)
 end
 
 10.times do
-  Comment.create(content: Faker::Beer.name, user_id: User.all.sample.id, review_id: Review.all.sample.id)
+  Comment.create(content: Faker::Beer.name, 
+                 user_id: User.all.sample.id, 
+                 review_id: Review.all.sample.id)
 end
