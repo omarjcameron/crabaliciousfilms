@@ -1,14 +1,27 @@
-<h1>Welcome to DBC Film Reviews</h1>
+<div class="jumbotron text-center">
+  <h1>Welcome to Crabalicious Film Reviews</h1>
+</div>
 
-<h2>All Categories</h2>
+<div class="container-fluid">
+  <%= link_to "All Users", users_path, class: 'btn btn-primary' %>
+</div>
 
-<ol>
-  <% @categories.each do |category| %>
-    <li><%= link_to "#{category.name}", category_path(category) %></li>
-    <ul>
-      <% category.films.each do |film| %>
-        <li><%= link_to "#{film.title}", film_path(film) %></li>
-      <% end %>
-    </ul>
-  <% end %>
-</ol>
+<div class="container text-center">
+  <h2>All Categories</h2>
+</div>
+
+<div class="container text-center">
+  <ol class="list-group list-unstyled">
+    <% @categories.each do |category| %>
+      <br>
+      <li class="list-group-item-info"><%= link_to "#{category.name}", category_path(category) %></li>
+      <br>
+      <ul class="list-group">
+        <% category.films.each do |film| %>
+          <li class="list-group-item"><%= link_to "#{film.title}", film_path(film) %></li>
+        <% end %>
+      </ul>
+      <br>
+    <% end %>
+  </ol>  
+</div>

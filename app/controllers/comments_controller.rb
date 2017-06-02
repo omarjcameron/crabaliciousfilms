@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  def new 
+  before_action :authorize, only: :new
+  def new
     @review = Review.find(params[:review_id])
     @comment = Comment.new
   end
