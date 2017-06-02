@@ -15,6 +15,8 @@ class Film < ApplicationRecord
 
   scope :highest_rated, ->  { all.sort_by(&:average_rating).reverse }
 
+  scope :top_five_rated, ->  { all.sort_by(&:average_rating).reverse.first(5) }
+
   def average_rating
     if self.ratings.any?
       (self.ratings.reduce(0) { |sum, rating| (sum + rating.stars) } / (self.ratings.count * 1.0)).round(2)

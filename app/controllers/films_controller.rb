@@ -1,5 +1,21 @@
 class FilmsController < ApplicationController
   before_action :authorize, only: :new
+
+  def index
+    if params[:filter]
+      case params[:filter]
+      when 'Highest Rated' then @films = Film.highest_rated
+      when 'Top 5 Rated' then @films = Film.top_five_rated
+      when 'Most Reviewed' then @films = Film.most_reviewed_list
+      when 'Top 5 Reviewed' then @films = Film.top_five_reviewed
+      when 'All Films' then @films = Film.all
+      else @films = Film.by_category(params[:filter])
+      end
+    else
+      @films = Film.all
+    end
+  end
+
   def create
     @film = Film.new(film_params)
     @film.category = Category.find_by(name: category_params[:category])
