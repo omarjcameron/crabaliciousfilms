@@ -1,8 +1,10 @@
-<%= form_for(@film, remote: true) do |f| %>
-  <%= f.label :title %><br>
-  <%= f.text_field :title %>
+<div class="container col-md-2 text-center">
+  <%= form_for(@film, remote: true) do |f| %>
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: 'form-control', placeholder: 'Title', required: true, autofocus: true %><br>
 
-  <%= f.select :category, Category.all.pluck(:name) %>
+    <%= f.select :category, Category.all.pluck(:name), {}, { class: 'custom-select' } %><br>
 
-  <%= f.submit "Add Film" %>
-<% end %>
+    <br><%= f.submit "Add Film", class: 'btn btn-md btn-primary' %>
+  <% end %>
+</div>
