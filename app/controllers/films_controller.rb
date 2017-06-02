@@ -1,5 +1,15 @@
 class FilmsController < ApplicationController
   before_action :authorize, only: :new
+
+  def index
+    @films = Film.where(nil)
+    @films = @films.most_reviewed(params[:most_reviewed]) if params[:most_reviewed].present?
+    @films = @films.highest_rated(params[:highest_rated]) if params[:highest_rated].present?
+    @films = @films.by_category(params[:by_category]) if params[:by_category].present?
+    @films = @films.top_five_reviewed(params[:top_five_reviewed]) if params[:top_five_reviewed].present?
+    @films = @films.most_reviewed_list(params[:most_reviewed_list]) if params[:most_reviewed_list].present?
+  end
+
   def create
     @film = Film.new(film_params)
     @film.category = Category.find_by(name: category_params[:category])
