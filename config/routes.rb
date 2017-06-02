@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'categories#index'
 
-  resources :users, only: [:index, :new, :show, :create]
+  resources :users, only: [:index, :new, :show, :create, :update]
 
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :ratings, except: [:index, :show]
   end
 
-  resources :comments, except: [:index, :show], 
+  resources :comments, except: [:index, :show],
                        path: 'reviews/:review_id/comments',
                        as: 'review_comments'
 end

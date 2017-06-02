@@ -5,7 +5,7 @@
     <h1>Profile Page for <%= @user.username %></h1>
   <% end %>
 
-  <% if current_user.trusted %>
+  <% if @user.trusted %>
     <h3>Review/Rated Films</h3>
     <% @user.reviewed_and_rated_films.each do |film| %>
       <p><b><%= film.title %></b></p>
