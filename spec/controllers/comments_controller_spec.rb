@@ -6,6 +6,10 @@ describe CommentsController do
   let(:first_comment_review) { Comment.first.review }
 
   describe 'GET #new' do
+    before(:each) do
+      session[:id] = '1'
+    end
+
     it 'responds with status code 200' do
       get :new, params: { review_id: review.id }
       expect(response).to have_http_status 200
