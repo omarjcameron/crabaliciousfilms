@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170601223745) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_films_on_category_id"
+    t.index ["title"], name: "index_films_on_title", unique: true
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170601223745) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["film_id"], name: "index_ratings_on_film_id"
+    t.index ["user_id", "film_id"], name: "index_ratings_on_user_id_and_film_id", unique: true
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(version: 20170601223745) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["film_id"], name: "index_reviews_on_film_id"
+    t.index ["user_id", "film_id"], name: "index_reviews_on_user_id_and_film_id", unique: true
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -68,6 +71,8 @@ ActiveRecord::Schema.define(version: 20170601223745) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "authorize_count", default: 0
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "comments", "reviews"

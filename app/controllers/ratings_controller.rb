@@ -8,7 +8,7 @@ class RatingsController < ApplicationController
   def create
     @film = Film.find(params[:film_id])
     @rating = @film.ratings.build(rating_params)
-    @rating.user_id = User.all.sample.id
+    @rating.user_id = current_user.id
 
     if @rating.save
       redirect_to @film
