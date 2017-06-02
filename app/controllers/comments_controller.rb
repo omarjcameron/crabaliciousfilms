@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   def create
     @review = Review.find(params[:review_id])
     @comment = @review.comments.build(comment_params)
-    @comment.user = User.all.sample
+    @comment.user = current_user
 
     if @comment.save
       redirect_to @review.film

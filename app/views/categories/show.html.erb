@@ -1,12 +1,22 @@
-<h1>Category Page for <%= @category.name %></h1>
+<h1><%= @category.name %></h1>
 
-<ol>
-  <% @category.films.each do |film| %>
-    <li><%= link_to "#{film.title}", film_path(film) %></li>
-  <% end %>
-</ol>
-<% if logged_in? && current_user.trusted %>
+
+
+<div class="container text-center">
+  <% if logged_in? && current_user.trusted %>
   <div id="add_film_div">
-    <%= link_to 'Add Film', new_film_path, remote: true %>
+    <%= link_to 'Add Film', new_film_path, remote: true, class: "btn btn-primary" %>
   </div>
 <% end %>
+  <div class="row">
+    <% @category.films.each do |film| %>
+      <div class="col-md-6">
+        <div class="card card-outline-primary">
+          <div class="card-block">
+            <%= link_to "#{film.title}", film_path(film) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
