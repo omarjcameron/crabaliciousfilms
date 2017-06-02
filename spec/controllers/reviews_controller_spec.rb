@@ -6,6 +6,10 @@ describe ReviewsController do
   let(:first_review_film) { Review.first.film }
 
   describe 'GET #new' do
+    before(:each) do
+      session[:id] = '1'
+    end
+    
     it 'responds with status code 200' do
       get :new, params: { film_id: film.id }
       expect(response).to have_http_status 200

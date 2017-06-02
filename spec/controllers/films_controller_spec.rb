@@ -46,6 +46,10 @@ describe FilmsController do
   end
 
   describe 'GET #new' do
+    before(:each) do
+      session[:id] = '1'
+    end
+    
     it 'responds with status code 200' do
       get :new
       expect(response).to have_http_status 200
