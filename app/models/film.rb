@@ -15,7 +15,7 @@ class Film < ApplicationRecord
 
   scope :highest_rated, ->  { all.sort_by(&:average_rating).reverse }
 
-  scope :top_five_rated, ->  { all.sort_by(&:average_rating).reverse.limit(5) }
+  scope :top_five_rated, ->  { all.sort_by(&:average_rating).reverse.first(5) }
 
   def average_rating
     if self.ratings.any?

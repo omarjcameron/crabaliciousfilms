@@ -4,7 +4,7 @@
 
 <%= form_tag("/films", method: "get") do %>
   <%= label_tag(:filter, "Filter Options:") %>
-  <%= select_tag(:filter, grouped_options_for_select({'Filters' => ['Most Reviewed', 'Highest Rated', 'Top 5 Reviewed', 'Top 5 Rated'], 'By Category' => Category.all.pluck(:name)})) %>
+  <%= select_tag(:filter, grouped_options_for_select({'Filters' => ['All Films', 'Most Reviewed', 'Highest Rated', 'Top 5 Reviewed', 'Top 5 Rated'], 'By Category' => Category.all.pluck(:name)})) %>
   <%= submit_tag("Filter") %>
 <% end %>
 
