@@ -20,14 +20,16 @@ class FilmsController < ApplicationController
     @film = Film.new(film_params)
     @film.category = Category.find_by(name: category_params[:category])
 
-    if @film.save
-      respond_to do |format|
+    respond_to do |format|
+      if @film.save
         format.html {redirect_to category_path(@film.category)}
         format.json
+      else
+        format.html { render action: 'new' }
+        format.js { render status: 500 }
+        # flash[:errors] = @film.errors.full_messages
+        # redirect_to new_film_path
       end
-    else
-      flash[:errors] = @film.errors.full_messages
-      redirect_to new_film_path
     end
   end
 

@@ -1,1 +1,5 @@
-$('body').append('<%= @film.title %>');
+<% if @film.errors.any? %>
+  <% @film.errors.full_messages.each do |msg| %>
+    $('#add_film_div').append("<%= msg %>");
+  <% end %>
+<% end %>
