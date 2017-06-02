@@ -1,26 +1,29 @@
-<div class="jumbotron text-center">
-  <h1>Crabalicious Film Reviews</h1>
-</div>
+<div class="bg">
+  <div class="jumbotron text-center">
+    <h1>Crabalicious Film Reviews</h1>
+  </div>
 
+  <div class="container text-center">
+    <h2>All Categories</h2>
+  </div>
 
-<div class="container text-center">
-  <h2>All Categories</h2>
-</div>
-
-<div class="container text-center">
-<div class="container-fluid">
-  <%= link_to "All Users", users_path, class: "btn btn-primary" %>
-  <%= link_to "All Films", films_path, class: "btn btn-primary" %>
-</div>
-  <div class="row">
-    <% @categories.each do |category| %>
-      <div class="col-md-6">
-        <div class="card card-outline-primary">
-          <div class="card-block">
-            <%= link_to "#{category.name}", category_path(category) %>
+  <div class="container text-center">
+  <div class="container-fluid">
+    <%= link_to "All Users", users_path, class: "btn btn-primary" %>
+    <%= link_to "All Films", films_path, class: "btn btn-primary" %>
+  </div>
+    <div class="row">
+      <% @categories.each do |category| %>
+        <div class="col-md-6">
+          <div class="card card-outline-primary">
+            <div class="card-block">
+              <%= link_to "#{category.name}", category_path(category) %>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
+
+
