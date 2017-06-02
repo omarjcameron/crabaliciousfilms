@@ -2,15 +2,25 @@
 
 <h2>Ratings</h2>
 
-<ol>
+<p>Average Rating - <%= @film.average_rating %> stars</p>
+<ul>
   <% @film.ratings.each do |rating| %>
-    <li><%= rating.stars %> - <%= rating.user.username %></li>
-    <%= link_to "Edit", edit_film_rating_path(@film, rating) %>
-    <%= link_to "Delete", film_rating_path(@film, rating), method: :delete %>
-  <% end %>
-</ol>
+    <li><%= rating.stars %> stars - <%= rating.user.username %></li>
 
-<%= link_to 'Add New Rating', new_film_rating_path(@film) %>
+    <% if logged_in? && current_user == rating.user %>
+
+      <%= link_to "Edit", edit_film_rating_path(@film, rating) %>
+      <%= link_to "Delete", film_rating_path(@film, rating), method: :delete %>
+
+    <% end %>
+  <% end %>
+</ul>
+
+<% if logged_in? %>
+
+  <%= link_to 'Add New Rating', new_film_rating_path(@film) %>
+
+<% end %>
 
 <h3>Reviews</h3>
 
@@ -18,6 +28,10 @@
   <%= render @film.reviews %>
 </div>
 
-<%= link_to "Add New Review", new_film_review_path(@film) %>
+<% if logged_in? && current_user.trusted %>
 
-<%= link_to 'Delete Film', film_path(@film), method: :delete %>
+  <%= link_to "Add New Review", new_film_review_path(@film) %>
+
+  <%= link_to 'Delete Film', film_path(@film), method: :delete %>
+
+<% end %>

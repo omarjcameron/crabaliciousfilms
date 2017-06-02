@@ -21,5 +21,6 @@ class Film < ApplicationRecord
     else
       0
     end
+
   end
 end
