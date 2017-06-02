@@ -6,5 +6,7 @@
   <% end %>
 </ol>
 <% if logged_in? && current_user.trusted %>
-  <%= link_to 'Add Film', new_film_path %>
+  <div id="add_film_div">
+    <%= link_to 'Add Film', new_film_path, remote: true %>
+  </div>
 <% end %>

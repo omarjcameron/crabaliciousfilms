@@ -21,7 +21,10 @@ class FilmsController < ApplicationController
     @film.category = Category.find_by(name: category_params[:category])
 
     if @film.save
-      redirect_to category_path(@film.category)
+      respond_to do |format|
+        format.html {redirect_to category_path(@film.category)}
+        format.json
+      end
     else
       flash[:errors] = @film.errors.full_messages
       redirect_to new_film_path
@@ -30,6 +33,10 @@ class FilmsController < ApplicationController
 
   def new
     @film = Film.new
+    respond_to do |format|
+      format.html { redirect_to new_film_path }
+      format.js
+    end
   end
 
   def show
