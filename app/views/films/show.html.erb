@@ -1,0 +1,50 @@
+<h1><%= @film.title %></h1>
+
+<div class="film-show-reviews">
+
+  <div class="container text-center">
+    <div class="row">
+        <div class="col-lg-6">
+          <div class="card card-outline-primary">
+            <div class="card-block">
+              <h2>Reviews</h2>
+              <% if logged_in? && current_user.trusted %>
+                <%= link_to "Add New Review", new_film_review_path(@film) %>
+              <% end %>
+              <%= render @film.reviews %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card card-outline-primary">
+            <div class="card-block">
+              <h2>Ratings</h2>
+              <% if logged_in? %>
+                <%= link_to 'Add New Rating', new_film_rating_path(@film) %>
+              <% end %>
+              <p>Average Rating - <%= @film.average_rating %> stars</p>
+              <ul class="unordered-list-style">
+                <% @film.ratings.each do |rating| %>
+                  <li><%= rating.stars %> stars - <%= rating.user.username %></li>
+
+                  <% if logged_in? && current_user == rating.user %>
+
+                    <%= link_to "Edit", edit_film_rating_path(@film, rating) %>
+                    <%= link_to "Delete", film_rating_path(@film, rating), method: :delete %>
+
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+<div class="delete-button">
+  <% if logged_in? && current_user.trusted %>
+    <%= link_to 'Delete Film', film_path(@film), method: :delete, class: "btn btn-sm btn-primary" %>
+  <% end %>
+</div>
+  </div>
+</div>
+

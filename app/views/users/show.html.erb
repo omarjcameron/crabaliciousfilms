@@ -1,0 +1,46 @@
+<div class="user-show">
+  <% if @user == current_user %>
+    <h1>Welcome, <%= current_user.username %>!</h1>
+  <% else %>
+    <h1>Profile Page for <%= @user.username %></h1>
+  <% end %>
+
+  <% if @user.trusted %>
+    <h3>Reviewed/Rated Films</h3>
+  <% else %>
+    <h3>Rated Films</h3>
+  <% end %>
+
+  <div class="container">
+    <div class="row">
+      <% if @user.trusted %>
+        <% @user.reviewed_and_rated_films.each do |film| %>
+          <div class="col-lg-3">
+            <p><b><%= film.title %></b></p>
+
+            <% if @user.review_for_film(film).empty? %>
+              <p>No Review</p>
+            <% else  %>
+              <p>Review Title: <%= @user.review_for_film(film)[0].title %></p>
+              <p>Review Body: <%= @user.review_for_film(film)[0].body %></p>
+            <% end %>
+
+            <% if @user.rating_for_film(film).empty? %>
+              <p>No Rating</p>
+            <% else %>
+              <p>Star Rating: <%= @user.rating_for_film(film)[0].stars %> stars</p>
+            <% end %>
+         </div>
+        <% end %>
+
+      <% else %>
+        <% @user.rated_films.each do |film| %>
+          <div class="col-lg-3">
+            <p><b><%= film.title %></b></p>
+            <p>Star Rating: <%= film.ratings[0].stars %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

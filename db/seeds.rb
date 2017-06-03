@@ -5,3 +5,50 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# User.destroy_all
+# Category.destroy_all
+# Film.destroy_all
+# Comment.destroy_all
+# Review.destroy_all
+# Rating.destroy_all
+
+
+User.create(username: 'Max', email: 'max@test.com', password: 'password', trusted: true)
+User.create(username: 'Mike', email: 'mike@test.com', password: 'password', trusted: true)
+
+4.times do
+  User.create(username: Faker::Name.first_name,
+              email: Faker::Internet.safe_email,
+              password: Faker::Name.first_name)
+end
+
+CATEGORIES = ['Action', 'Comedy', 'Drama', 'Thriller', 'Horror', 'RomCom', 'Adult', 'Kids']
+
+CATEGORIES.each do |category|
+  Category.create(name: category)
+end
+
+10.times do
+  Film.create(title: Faker::Name.name_with_middle,
+              category_id: Category.all.sample.id)
+end
+
+10.times do |n|
+  Review.create(title: Faker::Music.instrument,
+                body: Faker::Name.title,
+                user_id: User.where(trusted: true).sample.id,
+                film_id: Film.all[n].id)
+end
+
+10.times do |n|
+  Rating.create(stars: rand(1..5),
+                user_id: User.all.sample.id,
+                film_id: Film.all[n].id)
+end
+
+10.times do
+  Comment.create(content: Faker::Beer.name, 
+                 user_id: User.all.sample.id, 
+                 review_id: Review.all.sample.id)
+end

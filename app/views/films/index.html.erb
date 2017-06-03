@@ -1,0 +1,26 @@
+<h1 class="film-index">Check Out All These Great Films!</h1>
+
+<h2 class="film-index">All Films</h2>
+
+
+<div class="drop-down">
+  <%= form_tag("/films", method: "get") do %>
+    <%= label_tag(:filter, "Filter Options:") %>
+
+    <%= select_tag(:filter, grouped_options_for_select({'Filters' => ['All Films', 'Most Reviewed', 'Highest Rated', 'Top 5 Reviewed', 'Top 5 Rated'], 'By Category' => Category.all.pluck(:name)}), class: "") %>
+    <%= submit_tag("Filter") %>
+  <% end %>
+</div>
+
+<div class="container">
+    <div class="row">
+      <% @films.each do |film| %>
+        <div class="col-lg-3">
+            <h3><%= link_to "#{film.title}", film_path(film) %></h3>
+            <p>Rating: <%= film.average_rating %></p>
+            <p>Reviews: <%= film.reviews.count %></p>
+            <p>Category: <%= film.category.name %></p>
+        </div>
+      <% end %>
+    </div>
+</div>

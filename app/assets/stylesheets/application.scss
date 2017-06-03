@@ -1,0 +1,54 @@
+$enable-flex: true;
+
+@import "bootstrap";
+
+.bg {
+  background-image: url("felipe-portella-192311.jpg");
+  background-size: cover;
+
+
+}
+
+.card {
+  margin: 25px;
+}
+
+.col-lg-3 {
+  text-align: center;
+  padding: 20px;
+}
+
+.film-index {
+  text-align: center;
+}
+
+.user-show {
+  text-align: center;
+}
+
+.drop-down {
+  text-align: center;
+  padding: 50px;
+}
+
+.user-index {
+  margin-top: 5%;
+  text-align: center;
+}
+
+.unordered-list-style {
+  list-style-type: none;
+}
+
+.user-index-li {
+  margin-bottom: .5em;
+}
+
+h1 {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.delete-button {
+  margin: auto;
+}

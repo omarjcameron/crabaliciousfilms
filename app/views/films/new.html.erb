@@ -1,0 +1,7 @@
+<h1>Add New Film</h1>
+
+<%= render 'form' %>
+
+<% if flash[:errors] %>
+  <p><%= flash[:errors][0] %></p>
+<% end %>

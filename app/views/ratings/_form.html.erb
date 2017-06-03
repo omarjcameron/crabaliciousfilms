@@ -1,0 +1,13 @@
+<div class="container col-md-4 text-center">
+  <%= form_for [@film, @rating], class: 'form-inline' do |f| %>
+    <%= f.label :stars, "Stars" %>
+    <%= f.select :stars, [1, 2, 3, 4, 5], {}, { class: 'custom-select' } %>
+    <%= f.submit "Submit", class: 'btn btn-md btn-primary' %>
+  <% end %>
+
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |msg| %>
+      <p class="text-center bg-danger"><%= msg %></p>
+    <% end %>
+  <% end %>
+</div>

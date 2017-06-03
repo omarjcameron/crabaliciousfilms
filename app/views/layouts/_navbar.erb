@@ -1,0 +1,13 @@
+<nav class="navbar navbar-light bg-faded navbar-left">
+  <div class="container col-md-4">
+    <% if logged_in? %>
+      <%= link_to current_user.username, user_path(current_user) %>
+      <%= link_to 'Home', root_path, :class => 'navbar-brand' %>
+      <%= link_to "Sign Out", session_path(current_user), method: :delete %>  
+    <% else %>
+      <%= link_to "Sign Up", new_user_path %>
+      <%= link_to 'Home', root_path, :class => 'navbar-brand' %>
+      <%= link_to "Sign In", new_session_path %>
+    <% end %>    
+  </div>
+</nav>
