@@ -3,10 +3,8 @@ $enable-flex: true;
 @import "bootstrap";
 
 .bg {
-  background-image: url("felipe-portella-192311.jpg");
+  background: asset_url("felipe-portella-192311.jpg");
   background-size: cover;
-
-
 }
 
 .card {
