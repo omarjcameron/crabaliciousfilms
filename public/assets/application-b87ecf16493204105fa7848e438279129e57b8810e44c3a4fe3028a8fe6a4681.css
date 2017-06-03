@@ -10849,60 +10849,60 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 
 /* line 5, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .bg {
-  background-image: url("felipe-portella-192311.jpg");
+  background: url(/assets/felipe-portella-192311-532dcbb206ada0735d30e333e02c41ccb8af53a35f4f67dd966ca41c14b1d089.jpg);
   background-size: cover;
 }
 
-/* line 12, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 10, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .card {
   margin: 25px;
 }
 
-/* line 16, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 14, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .col-lg-3 {
   text-align: center;
   padding: 20px;
 }
 
-/* line 21, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 19, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .film-index {
   text-align: center;
 }
 
-/* line 25, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 23, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .user-show {
   text-align: center;
 }
 
-/* line 29, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 27, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .drop-down {
   text-align: center;
   padding: 50px;
 }
 
-/* line 34, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 32, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .user-index {
   margin-top: 5%;
   text-align: center;
 }
 
-/* line 39, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 37, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .unordered-list-style {
   list-style-type: none;
 }
 
-/* line 43, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 41, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .user-index-li {
   margin-bottom: .5em;
 }
 
-/* line 47, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 45, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 h1 {
   text-align: center;
   padding-top: 20px;
 }
 
-/* line 52, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
+/* line 50, /Users/mpeiros/Desktop/Dev Bootcamp/Phase 3/Week 7/dbc-client-project/app/assets/stylesheets/application.scss */
 .delete-button {
   margin: auto;
 }
