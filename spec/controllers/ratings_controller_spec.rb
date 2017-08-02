@@ -33,15 +33,15 @@ describe RatingsController do
 
   describe 'POST #create' do
     context 'when valid params are passed' do
-      before(:each) do
-        post :create, params: { film_id: film.id, rating: { stars: 4 } }
+      before(:each) do |test|
+        post :create, params: { film_id: film.id, rating: { stars: 4 } } unless test.metadata[:has_request]
       end
 
       it 'responds with status code 302' do
         expect(response).to have_http_status 302
       end
 
-      it 'creates a new rating in the database' do
+      it 'creates a new rating in the database', :has_request do
         expect { post(:create, params: { film_id: film.id, rating: { stars: 4 } }) }.to change(Rating, :count).by(1)
       end
 
@@ -59,15 +59,15 @@ describe RatingsController do
     end
 
     context 'when invalid params are passed' do
-      before(:each) do
-        post :create, params: { film_id: film.id, rating: { stars: nil } }        
+      before(:each) do |test|
+        post :create, params: { film_id: film.id, rating: { stars: nil } } unless test.metadata[:has_request]   
       end
 
       it 'sets error message that rating was not created' do
         expect(flash[:errors][0]).to eq "Stars can't be blank"
       end
 
-      it 'does not create a new rating in the database' do
+      it 'does not create a new rating in the database', :has_request do
         expect { post(:create, params: { film_id: film.id, rating: { stars: nil } }) }.to change(Rating, :count).by(0)
       end
 
@@ -105,15 +105,15 @@ describe RatingsController do
 
   describe 'PATCH #update' do
     context 'when valid params are passed' do
-      before(:each) do
-        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: 2 } }       
+      before(:each) do |test|
+        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: 2 } } unless test.metadata[:has_request]       
       end
 
       it 'responds with status code 302' do
         expect(response).to have_http_status 302
       end
 
-      it 'updates the rating in the database' do
+      it 'updates the rating in the database', :has_request do
         rating.update_attributes(stars: 4)
         patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: 2 } }
         expect(assigns(:rating).stars).to eq 2
@@ -133,12 +133,15 @@ describe RatingsController do
     end
 
     context 'when invalid params are passed' do
+      before(:each) do |test|
+        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: nil } } unless test.metadata[:has_request]        
+      end
+
       it 'sets error message that rating was not created' do
-        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: nil } }
         expect(flash[:errors][0]).to eq "Stars can't be blank"
       end
 
-      it 'does not update the rating in the database' do
+      it 'does not update the rating in the database', :has_request do
         rating.update_attributes(stars: 4)
         patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: nil } }
         rating.reload
@@ -146,29 +149,29 @@ describe RatingsController do
       end
 
       it 'assigns the unsaved rating as @rating' do
-        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: nil } }
         expect(assigns(:rating)).to eq rating
       end
 
       it 'redirects to the edit film rating path' do
-        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: nil } }
         expect(response).to redirect_to edit_film_rating_path(first_rating_film, rating)
       end
     end
   end
 
   describe 'DELETE #destroy' do
+    before(:each) do |test|
+      delete :destroy, params: { film_id: first_rating_film.id, id: rating.id } unless test.metadata[:has_request]      
+    end
+
     it 'responds with status code 302' do
-      delete :destroy, params: { film_id: first_rating_film.id, id: rating.id }
       expect(response).to have_http_status 302
     end
 
-    it 'destroys the requested rating' do
+    it 'destroys the requested rating', :has_request do
       expect { delete(:destroy, params: { film_id: first_rating_film.id, id: rating.id }) }.to change(Rating, :count).by(-1)
     end
 
     it 'redirects to the film path' do
-      delete :destroy, params: { film_id: first_rating_film.id, id: rating.id }
       expect(response).to redirect_to film_path(first_rating_film)
     end
   end
