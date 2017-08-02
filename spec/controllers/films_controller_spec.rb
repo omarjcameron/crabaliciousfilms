@@ -1,6 +1,58 @@
 require 'rails_helper'
 
 describe FilmsController do
+  describe 'GET #index' do
+    context 'when no filter params are passed' do
+      before(:each) do
+        get :index
+      end
+
+      it 'responds with status code 200' do
+        expect(response).to have_http_status 200
+      end
+
+      it 'assigns all categories to @categories' do
+        expect(assigns(:films)).to eq Film.all
+      end
+
+      it 'renders the :index template' do
+        expect(response).to render_template(:index)
+      end
+    end
+
+    context 'when filter params are passed' do
+      it 'filters highest rated films' do
+        get :index, params: { filter: 'Highest Rated' }
+        expect(assigns(:films)).to eq Film.highest_rated
+      end
+
+      it 'filters top 5 rated films' do
+        get :index, params: { filter: 'Top 5 Rated' }
+        expect(assigns(:films)).to eq Film.top_five_rated
+      end
+
+      it 'filters most reviewed films' do
+        get :index, params: { filter: 'Most Reviewed' }
+        expect(assigns(:films)).to eq Film.most_reviewed_list
+      end
+
+      it 'filters top 5 reviewed films' do
+        get :index, params: { filter: 'Top 5 Reviewed' }
+        expect(assigns(:films)).to eq Film.top_five_reviewed
+      end
+
+      it 'filters all films' do
+        get :index, params: { filter: 'All Films' }
+        expect(assigns(:films)).to eq Film.all
+      end
+
+      it 'filters by category' do
+        get :index, params: { filter: 'Comedy' }
+        expect(assigns(:films)).to eq Film.by_category('Comedy')         
+      end
+    end
+  end
+
   describe 'POST #create' do
     context 'when valid params are passed' do
       it 'responds with status code 302' do
