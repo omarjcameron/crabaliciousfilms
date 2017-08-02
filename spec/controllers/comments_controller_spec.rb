@@ -5,6 +5,9 @@ describe CommentsController do
   let(:comment) { Comment.first }
   let(:first_comment_review) { Comment.first.review }
 
+  let(:user) { User.first }
+  before { allow(controller).to receive(:current_user) { user } }
+
   describe 'GET #new' do
     before(:each) do
       session[:id] = '1'
@@ -33,8 +36,11 @@ describe CommentsController do
 
   describe 'POST #create' do
     context 'when valid params are passed' do
-      it 'responds with status code 302' do
+      before(:each) do
         post :create, params: { review_id: review.id, comment: { content: 'This is a comment' } }
+      end
+
+      it 'responds with status code 302' do
         expect(response).to have_http_status 302
       end
 
@@ -43,24 +49,24 @@ describe CommentsController do
       end
 
       it 'assigns the newly created comment as @comment' do
-        post :create, params: { review_id: review.id, comment: { content: 'This is a comment' } }
         expect(assigns(:comment)).to eq Comment.last
       end
 
       it 'assigns the newly created comment to the correct review' do
-        post :create, params: { review_id: review.id, comment: { content: 'This is a comment' } }
         expect(assigns(:review).comments.last).to eq Comment.last
       end
 
       it 'redirects to the film page of the newly created comment' do
-        post :create, params: { review_id: review.id, comment: { content: 'This is a comment' } }
         expect(response).to redirect_to film_path(Comment.last.review.film)
       end
     end
 
     context 'when invalid params are passed' do
-      it 'sets error message that comment was not created' do
+      before(:each) do
         post :create, params: { review_id: review.id, comment: { content: '' } }
+      end
+
+      it 'sets error message that comment was not created' do
         expect(flash[:errors][0]).to eq "Content can't be blank"
       end
 
@@ -69,12 +75,10 @@ describe CommentsController do
       end
 
       it 'assigns the unsaved comment as @comment' do
-        post :create, params: { review_id: review.id, comment: { content: '' } }
         expect(assigns(:comment)).to be_a_new Comment
       end
 
       it 'redirects to the new review comment path' do
-        post :create, params: { review_id: review.id, comment: { content: '' } }
         expect(response).to redirect_to new_review_comment_path(review)
       end
     end
