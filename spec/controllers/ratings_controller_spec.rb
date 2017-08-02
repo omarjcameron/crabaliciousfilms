@@ -11,25 +11,22 @@ describe RatingsController do
   describe 'GET #new' do
     before(:each) do
       session[:id] = '1'
+      get :new, params: { film_id: film.id }
     end
     
     it 'responds with status code 200' do
-      get :new, params: { film_id: film.id }
       expect(response).to have_http_status 200
     end
 
     it 'assigns the correct film to @film' do
-      get :new, params: { film_id: film.id }
       expect(assigns(:film)).to eq film
     end
 
     it 'assigns a new rating to @rating' do
-      get :new, params: { film_id: film.id }
       expect(assigns(:rating)).to be_a_new Rating
     end
 
     it 'renders the new template' do
-      get :new, params: { film_id: film.id }
       expect(response).to render_template(:new)
     end
   end
@@ -85,31 +82,34 @@ describe RatingsController do
   end
 
   describe 'GET #edit' do
-    it 'responds with status code 200' do
+    before(:each) do
       get :edit, params: { film_id: first_rating_film.id, id: rating.id }
+    end
+
+    it 'responds with status code 200' do
       expect(response).to have_http_status 200
     end
 
     it 'assigns the correct film to @film' do
-      get :edit, params: { film_id: first_rating_film.id, id: rating.id }
       expect(assigns(:film)).to eq first_rating_film
     end
 
     it 'assigns the correct rating to @rating' do
-      get :edit, params: { film_id: first_rating_film.id, id: rating.id }
       expect(assigns(:rating)).to eq rating
     end
 
     it 'renders the edit template' do
-      get :edit, params: { film_id: first_rating_film.id, id: rating.id }
       expect(response).to render_template(:edit)
     end
   end
 
   describe 'PATCH #update' do
     context 'when valid params are passed' do
+      before(:each) do
+        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: 2 } }       
+      end
+
       it 'responds with status code 302' do
-        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: 2 } }
         expect(response).to have_http_status 302
       end
 
@@ -120,17 +120,14 @@ describe RatingsController do
       end
 
       it 'assigns the correct film to @film' do
-        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: 2 } }
         expect(assigns(:film)).to eq first_rating_film
       end
 
       it 'assigns the correct rating to @rating' do
-        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: 2 } }
         expect(assigns(:rating)).to eq rating
       end
 
       it 'redirects to the film page of the updated rating' do
-        patch :update, params: { film_id: first_rating_film.id, id: rating.id, rating: { stars: 2 } }
         expect(response).to redirect_to film_path(first_rating_film)
       end
     end

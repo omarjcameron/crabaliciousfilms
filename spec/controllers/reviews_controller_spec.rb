@@ -33,15 +33,15 @@ describe ReviewsController do
 
   describe 'POST #create' do
     context 'when valid params are passed' do
-      before(:each) do
-        post :create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
+      before(:each) do |test|
+        post :create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } } unless test.metadata[:has_request]
       end
 
       it 'responds with status code 302' do
         expect(response).to have_http_status 302
       end
 
-      it 'creates a new review in the database' do
+      it 'creates a new review in the database', :has_request do
         expect { post(:create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }) }.to change(Review, :count).by(1)
       end
 
@@ -59,15 +59,15 @@ describe ReviewsController do
     end
 
     context 'when invalid params are passed' do
-      before(:each) do
-        post :create, params: { film_id: film.id, review: { title: '', body: 'I enjoyed this one' } }
+      before(:each) do |test|
+        post :create, params: { film_id: film.id, review: { title: '', body: 'I enjoyed this one' } } unless test.metadata[:has_request]
       end
 
       it 'sets error message that review was not created' do
         expect(flash[:errors][0]).to eq "Title can't be blank"
       end
 
-      it 'does not create a new review in the database' do
+      it 'does not create a new review in the database', :has_request do
         expect { post(:create, params: { film_id: film.id, review: { title: '', body: 'I enjoyed this one' } }) }.to change(Review, :count).by(0)
       end
 
@@ -105,15 +105,15 @@ describe ReviewsController do
 
   describe 'PATCH #update' do
     context 'when valid params are passed' do
-      before(:each) do
-        patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
+      before(:each) do |test|
+        patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: 'Good movie', body: 'I enjoyed this one' } } unless test.metadata[:has_request]
       end
 
       it 'responds with status code 302' do
         expect(response).to have_http_status 302
       end
 
-      it 'updates the review in the database' do
+      it 'updates the review in the database', :has_request do
         review.update_attributes(title: 'Great movie')
         patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: 'Bad movie' } }
         expect(assigns(:review).title).to eq 'Bad movie'
@@ -133,15 +133,15 @@ describe ReviewsController do
     end
 
     context 'when invalid params are passed' do
-      before(:each) do
-        patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: '', body: 'I enjoyed this one' } }
+      before(:each) do |test|
+        patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: '', body: 'I enjoyed this one' } } unless test.metadata[:has_request]
       end
 
       it 'sets error message that review was not created' do
         expect(flash[:errors][0]).to eq "Title can't be blank"
       end
 
-      it 'does not update the review in the database' do
+      it 'does not update the review in the database', :has_request do
         review.update_attributes(body: 'New Body')
         patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: '', body: 'I enjoyed this one' } }
         review.reload
@@ -159,17 +159,19 @@ describe ReviewsController do
   end
 
   describe 'DELETE #destroy' do
+    before(:each) do |test|
+      delete :destroy, params: { film_id: first_review_film.id, id: review.id } unless test.metadata[:has_request]      
+    end
+
     it 'responds with status code 302' do
-      delete :destroy, params: { film_id: first_review_film.id, id: review.id }
       expect(response).to have_http_status 302
     end
 
-    it 'destroys the requested review' do
+    it 'destroys the requested review', :has_request do
       expect { delete(:destroy, params: { film_id: first_review_film.id, id: review.id }) }.to change(Review, :count).by(-1)
     end
 
     it 'redirects to the film path' do
-      delete :destroy, params: { film_id: first_review_film.id, id: review.id }
       expect(response).to redirect_to film_path(first_review_film)
     end
   end
