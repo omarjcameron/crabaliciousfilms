@@ -4,5 +4,4 @@ rvm:
  - jruby
  - rbx-2
  - 2.0.0-p247
- script: rails
- 
+script: rails
