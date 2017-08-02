@@ -33,8 +33,11 @@ describe ReviewsController do
 
   describe 'POST #create' do
     context 'when valid params are passed' do
-      it 'responds with status code 302' do
+      before(:each) do
         post :create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
+      end
+
+      it 'responds with status code 302' do
         expect(response).to have_http_status 302
       end
 
@@ -43,24 +46,24 @@ describe ReviewsController do
       end
 
       it 'assigns the newly created review as @review' do
-        post :create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(assigns(:review)).to eq Review.last
       end
 
       it 'assigns the newly created review to the correct film' do
-        post :create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(assigns(:film).reviews.last).to eq Review.last
       end
 
       it 'redirects to the film page of the newly created review' do
-        post :create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(response).to redirect_to film_path(Review.last.film)
       end
     end
 
     context 'when invalid params are passed' do
-      it 'sets error message that review was not created' do
+      before(:each) do
         post :create, params: { film_id: film.id, review: { title: '', body: 'I enjoyed this one' } }
+      end
+
+      it 'sets error message that review was not created' do
         expect(flash[:errors][0]).to eq "Title can't be blank"
       end
 
@@ -69,43 +72,44 @@ describe ReviewsController do
       end
 
       it 'assigns the unsaved review as @review' do
-        post :create, params: { film_id: film.id, review: { title: '', body: 'I enjoyed this one' } }
         expect(assigns(:review)).to be_a_new Review
       end
 
       it 'redirects to the new film review path' do
-        post :create, params: { film_id: film.id, review: { title: '', body: 'I enjoyed this one' } }
         expect(response).to redirect_to new_film_review_path(film)
       end
     end
   end
 
   describe 'GET #edit' do
-    it 'responds with status code 200' do
+    before(:each) do
       get :edit, params: { film_id: first_review_film.id, id: review.id }
+    end
+
+    it 'responds with status code 200' do
       expect(response).to have_http_status 200
     end
 
     it 'assigns the correct film to @film' do
-      get :edit, params: { film_id: first_review_film.id, id: review.id }
       expect(assigns(:film)).to eq first_review_film
     end
 
     it 'assigns the correct review to @review' do
-      get :edit, params: { film_id: first_review_film.id, id: review.id }
       expect(assigns(:review)).to eq review
     end
 
     it 'renders the edit template' do
-      get :edit, params: { film_id: first_review_film.id, id: review.id }
       expect(response).to render_template(:edit)
     end
   end
 
   describe 'PATCH #update' do
     context 'when valid params are passed' do
-      it 'responds with status code 302' do
+      before(:each) do
         patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
+      end
+
+      it 'responds with status code 302' do
         expect(response).to have_http_status 302
       end
 
@@ -116,24 +120,24 @@ describe ReviewsController do
       end
 
       it 'assigns the correct film to @film' do
-        patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(assigns(:film)).to eq first_review_film
       end
 
       it 'assigns the correct review to @review' do
-        patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(assigns(:review)).to eq review
       end
 
       it 'redirects to the film page of the updated review' do
-        patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(response).to redirect_to film_path(first_review_film)
       end
     end
 
     context 'when invalid params are passed' do
-      it 'sets error message that review was not created' do
+      before(:each) do
         patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: '', body: 'I enjoyed this one' } }
+      end
+
+      it 'sets error message that review was not created' do
         expect(flash[:errors][0]).to eq "Title can't be blank"
       end
 
@@ -145,12 +149,10 @@ describe ReviewsController do
       end
 
       it 'assigns the unsaved review as @review' do
-        patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: '', body: 'I enjoyed this one' } }
         expect(assigns(:review)).to eq review
       end
 
       it 'redirects to the edit film review path' do
-        patch :update, params: { film_id: first_review_film.id, id: review.id, review: { title: '', body: 'I enjoyed this one' } }
         expect(response).to redirect_to edit_film_review_path(first_review_film, review)
       end
     end
