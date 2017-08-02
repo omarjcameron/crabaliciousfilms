@@ -5,6 +5,9 @@ describe RatingsController do
   let(:rating) { Rating.first }
   let(:first_rating_film) { Rating.first.film }
 
+  let(:user) { User.first }
+  before { allow(controller).to receive(:current_user) { user } }
+
   describe 'GET #new' do
     before(:each) do
       session[:id] = '1'
@@ -33,8 +36,11 @@ describe RatingsController do
 
   describe 'POST #create' do
     context 'when valid params are passed' do
-      it 'responds with status code 302' do
+      before(:each) do
         post :create, params: { film_id: film.id, rating: { stars: 4 } }
+      end
+
+      it 'responds with status code 302' do
         expect(response).to have_http_status 302
       end
 
@@ -43,24 +49,24 @@ describe RatingsController do
       end
 
       it 'assigns the newly created rating as @rating' do
-        post :create, params: { film_id: film.id, rating: { stars: 4 } }
         expect(assigns(:rating)).to eq Rating.last
       end
 
       it 'assigns the newly created rating to the correct film' do
-        post :create, params: { film_id: film.id, rating: { stars: 4 } }
         expect(assigns(:film).ratings.last).to eq Rating.last
       end
 
       it 'redirects to the film page of the newly created rating' do
-        post :create, params: { film_id: film.id, rating: { stars: 4 } }
         expect(response).to redirect_to film_path(Rating.last.film)
       end
     end
 
     context 'when invalid params are passed' do
+      before(:each) do
+        post :create, params: { film_id: film.id, rating: { stars: nil } }        
+      end
+
       it 'sets error message that rating was not created' do
-        post :create, params: { film_id: film.id, rating: { stars: nil } }
         expect(flash[:errors][0]).to eq "Stars can't be blank"
       end
 
@@ -69,12 +75,10 @@ describe RatingsController do
       end
 
       it 'assigns the unsaved rating as @rating' do
-        post :create, params: { film_id: film.id, rating: { stars: nil } }
         expect(assigns(:rating)).to be_a_new Rating
       end
 
       it 'redirects to the new film rating path' do
-        post :create, params: { film_id: film.id, rating: { stars: nil } }
         expect(response).to redirect_to new_film_rating_path(film)
       end
     end

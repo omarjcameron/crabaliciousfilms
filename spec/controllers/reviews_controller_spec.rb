@@ -5,28 +5,28 @@ describe ReviewsController do
   let(:review) { Review.first }
   let(:first_review_film) { Review.first.film }
 
+  let(:user) { User.first }
+  before { allow(controller).to receive(:current_user) { user } }
+
   describe 'GET #new' do
     before(:each) do
       session[:id] = '1'
+      get :new, params: { film_id: film.id }
     end
     
     it 'responds with status code 200' do
-      get :new, params: { film_id: film.id }
       expect(response).to have_http_status 200
     end
 
     it 'assigns the correct film to @film' do
-      get :new, params: { film_id: film.id }
       expect(assigns(:film)).to eq film
     end
 
     it 'assigns a new review to @review' do
-      get :new, params: { film_id: film.id }
       expect(assigns(:review)).to be_a_new Review
     end
 
     it 'renders the new template' do
-      get :new, params: { film_id: film.id }
       expect(response).to render_template(:new)
     end
   end
