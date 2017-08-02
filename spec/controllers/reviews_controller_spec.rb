@@ -33,27 +33,27 @@ describe ReviewsController do
 
   describe 'POST #create' do
     context 'when valid params are passed' do
-      before(:each) do |test|
-        post :create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } } unless test.metadata[:has_request]
-      end
-
       it 'responds with status code 302' do
+        post :create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(response).to have_http_status 302
       end
 
-      it 'creates a new review in the database', :has_request do
-        expect { post(:create, params: { film_id: film.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }) }.to change(Review, :count).by(1)
+      it 'creates a new review in the database' do
+        expect { post(:create, params: { film_id: Film.second.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }) }.to change(Review, :count).by(1)
       end
 
       it 'assigns the newly created review as @review' do
+        post :create, params: { film_id: Film.third.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(assigns(:review)).to eq Review.last
       end
 
       it 'assigns the newly created review to the correct film' do
+        post :create, params: { film_id: Film.fourth.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(assigns(:film).reviews.last).to eq Review.last
       end
 
       it 'redirects to the film page of the newly created review' do
+        post :create, params: { film_id: Film.fifth.id, review: { title: 'Good movie', body: 'I enjoyed this one' } }
         expect(response).to redirect_to film_path(Review.last.film)
       end
     end
