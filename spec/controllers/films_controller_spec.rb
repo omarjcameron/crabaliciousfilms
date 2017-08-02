@@ -81,8 +81,9 @@ describe FilmsController do
         post :create, params: { film: { title: '', category: 'Thriller' } } unless test.metadata[:has_request]                
       end
 
-      it 'sets error message that film was not created' do
-        expect(flash[:errors][0]).to eq "Title can't be blank"
+      it 'responds with status code 500', :has_request do
+        post :create, xhr: true, params: { film: { title: '', category: 'Thriller' } }
+        expect(response).to have_http_status 500
       end
 
       it 'does not create a new film in the database', :has_request do
@@ -93,8 +94,8 @@ describe FilmsController do
         expect(assigns(:film)).to be_a_new Film
       end
 
-      it 'redirects to the new film path' do
-        expect(response).to redirect_to new_film_path
+      it 'renders the new template' do
+        expect(response).to render_template(:new)
       end
     end
   end
@@ -105,16 +106,16 @@ describe FilmsController do
       get :new
     end
     
-    it 'responds with status code 200' do
-      expect(response).to have_http_status 200
+    it 'responds with status code 302' do
+      expect(response).to have_http_status 302
     end
 
     it 'assigns a new film to @film' do
       expect(assigns(:film)).to be_a_new Film
     end
 
-    it 'renders the new template' do
-      expect(response).to render_template(:new)
+    it 'redirects to the new template' do
+      expect(response).to redirect_to new_film_path
     end
   end
 
