@@ -5,7 +5,7 @@ describe RatingsController do
   let(:rating) { Rating.first }
   let(:first_rating_film) { Rating.first.film }
 
-  let(:user) { User.first }
+  let(:user) { User.third }
   before { allow(controller).to receive(:current_user) { user } }
 
   describe 'GET #new' do
@@ -33,27 +33,27 @@ describe RatingsController do
 
   describe 'POST #create' do
     context 'when valid params are passed' do
-      before(:each) do |test|
-        post :create, params: { film_id: film.id, rating: { stars: 4 } } unless test.metadata[:has_request]
-      end
-
       it 'responds with status code 302' do
+        post :create, params: { film_id: film.id, rating: { stars: 4 } }
         expect(response).to have_http_status 302
       end
 
       it 'creates a new rating in the database', :has_request do
-        expect { post(:create, params: { film_id: film.id, rating: { stars: 4 } }) }.to change(Rating, :count).by(1)
+        expect { post(:create, params: { film_id: Film.second.id, rating: { stars: 4 } }) }.to change(Rating, :count).by(1)
       end
 
       it 'assigns the newly created rating as @rating' do
+        post :create, params: { film_id: Film.third.id, rating: { stars: 4 } }
         expect(assigns(:rating)).to eq Rating.last
       end
 
       it 'assigns the newly created rating to the correct film' do
+        post :create, params: { film_id: Film.fourth.id, rating: { stars: 4 } }
         expect(assigns(:film).ratings.last).to eq Rating.last
       end
 
       it 'redirects to the film page of the newly created rating' do
+        post :create, params: { film_id: Film.fifth.id, rating: { stars: 4 } }
         expect(response).to redirect_to film_path(Rating.last.film)
       end
     end
