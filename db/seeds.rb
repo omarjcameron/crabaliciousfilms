@@ -43,7 +43,7 @@ end
 
 10.times do |n|
   Rating.create(stars: rand(1..5),
-                user_id: User.all.sample.id,
+                user_id: User.where(trusted: true).sample.id,
                 film_id: Film.all[n].id)
 end
 
