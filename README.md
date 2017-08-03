@@ -14,11 +14,9 @@ To continue building skills in web application development.
 
 ### Usage
 
-
 This application has been deployed to Heroku and is accessible here:
 
 https://cryptic-plains-35196.herokuapp.com/
-
 
 ### Languages, Frameworks & APIs
 
