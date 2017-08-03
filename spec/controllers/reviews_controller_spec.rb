@@ -5,7 +5,7 @@ describe ReviewsController do
   let(:review) { Review.first }
   let(:first_review_film) { Review.first.film }
 
-  let(:user) { User.first }
+  let(:user) { User.last }
   before { allow(controller).to receive(:current_user) { user } }
 
   describe 'GET #new' do
