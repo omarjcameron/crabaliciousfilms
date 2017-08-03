@@ -72,19 +72,21 @@ describe SessionsController do
   end
 
   describe 'DELETE #destroy' do
+    before(:each) do |test|
+      delete :destroy, params: { id: '1' } unless test.metadata[:has_request]
+    end
+
     it 'responds with status code 302' do
-      delete :destroy, params: { id: '1' }
       expect(response).to have_http_status 302
     end
 
-    it 'destroys the requested session' do
+    it 'destroys the requested session', :has_request do
        session[:id] = '1'
        delete :destroy, params: { id: '1' }
        expect(session[:id]).to eq nil
     end
 
     it 'redirects to the root path' do
-      delete :destroy, params: { id: '1' }
       expect(response).to redirect_to root_path
     end
   end

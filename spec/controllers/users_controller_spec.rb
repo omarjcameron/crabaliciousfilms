@@ -4,18 +4,19 @@ describe UsersController do
   let(:user) { User.first }
 
   describe 'GET #show' do
+    before(:each) do
+      get :show, params: { id: user.id }      
+    end
+
     it 'responds with status code 200' do
-      get :show, params: { id: user.id }
       expect(response).to have_http_status 200
     end
 
     it 'assigns the correct user to @user' do
-      get :show, params: { id: user.id }
       expect(assigns(:user)).to eq user
     end
 
     it 'renders the :show template' do
-      get :show, params: { id: user.id }
       expect(response).to render_template(:show)
     end  
   end  
@@ -40,16 +41,16 @@ describe UsersController do
 
   describe 'POST #create' do
     context 'when valid params are passed' do
-      before(:each) do
-        post :create, params: { user: { username: 'Example', email: 'example@test.com', password: 'password' } }
+      before(:each) do |test|
+        post :create, params: { user: { username: 'Example', email: 'example@test.com', password: 'password' } } unless test.metadata[:has_request]
       end
 
       it 'responds with status code 302' do
         expect(response).to have_http_status 302
       end
 
-      it 'creates a new user in the database' do
-        expect(User.last.username).to eq 'Example'
+      it 'creates a new user in the database', :has_request do
+        expect { post(:create, params: { user: { username: 'Example', email: 'example@test.com', password: 'password' } }) }.to change(User, :count).by(1)
       end
 
       it 'assigns the newly created user as @user' do
@@ -66,12 +67,12 @@ describe UsersController do
     end
 
     context 'when invalid params are passed' do
-      before(:each) do
-        post :create, params: { user: { username: 'Example', email: '', password: '123' } }
+      before(:each) do |test|
+        post :create, params: { user: { username: 'Example', email: '', password: '123' } } unless test.metadata[:has_request]
       end
 
-      it 'does not add a user to the database' do
-        expect(assigns(User.last.username)).to_not eq 'Example'
+      it 'does not add a user to the database', :has_request do
+        expect { post(:create, params: { user: { username: 'Example', email: '', password: '123' } }) }.to change(User, :count).by(0)
       end
 
       it 'assigns the unsaved user as @user' do
