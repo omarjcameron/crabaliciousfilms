@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mpeiros/dbc-client-project.svg?branch=master)](https://travis-ci.org/mpeiros/dbc-client-project)
 
-![Crab Logo](CrabaliciousFilms.png)
+![Crab Logo](http://7-themes.com/data_images/out/45/6925311-beach-crab-wallpaper.jpg)
 
 ## Synopsis
 
