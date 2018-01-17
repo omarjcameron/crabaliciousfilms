@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mpeiros/dbc-client-project.svg?branch=master)](https://travis-ci.org/mpeiros/dbc-client-project)
 
-![Crab Logo](https://github.com/omarjcameron/dbc-client-project/blob/master/app/assets/images/CrabaliciousFilms.png)
+![Crab Logo](CrabaliciousFilms.png)
 
 ## Synopsis
 
